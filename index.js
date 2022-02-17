@@ -20,13 +20,20 @@ function converter(input) {
 
 function expenseCalculator(cost1, cost2, cost3, earn) {
     let totalExpenses = converter(cost1) + converter(cost2) + converter(cost3);
-    totalExpense.innerText = totalExpenses;
+
+    if (cost1.value == "" && cost2.value == "" && cost3.value == "") {
+        totalExpense.innerText = "No Expenses Now"
+
+    } else if (cost1.value != Number || cost2.value != Number || cost3.value != Number) {
+        alert("Your all value should be positive number")
+    } else {
+        totalExpense.innerText = totalExpenses;
+
+    }
     if (converter(earn) < totalExpenses) {
         balance.innerText = "Exceed Your earned limit"
         return;
     }
-
-
     let balanceValue = converter(earn) - totalExpenses;
     balance.innerText = balanceValue;
     return balanceValue;
@@ -45,12 +52,8 @@ calculateBtn.addEventListener("click", function () {
     if (isNaN(income.value) || income.value == "" || income.value < 0) {
         window.alert("Correct your  amount of earned money")
         income.value = ''
-    } else if (rent.value == "" && food.value == "" && clothes.value == "") {
-        totalExpense.innerText = "No Expenses Now"
-
-
     } else if (rent.value < 0 || food.value < 0 || clothes.value < 0) {
-        window.alert("Your all value should be number")
+        window.alert("Your all value should be positive number")
     } else {
         expenseCalculator(food, rent, clothes, income);
 
